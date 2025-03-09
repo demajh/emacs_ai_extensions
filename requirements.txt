@@ -1,0 +1,4 @@
+chromadb==0.3.29
+openai==0.28
+tiktoken
+pathspec
