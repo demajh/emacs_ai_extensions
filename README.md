@@ -165,5 +165,33 @@ python3 index_codebase.py /path/to/project [subdir]
 
 - **Key Functions:**
 
-- `retrieve_relevant_chunks(db_dir, query, top_k)`: Queries the database for matching chunks. - **Usage Example:** ```bash python3 query_codebase.py /path/to/project "How do I call get_secrets()?" ``` --- ## Troubleshooting - **Ensure Consistency:** Use the same project root when indexing and querying so that the `<project_root>/chroma_db` folder is correctly referenced. - **Environment Variables:** Make sure the `OPENAI_API_KEY` is set in your shell environment or via Emacs’s `setenv`. - **Dependencies:** Verify all Python packages (`chromadb`, `openai`, `tiktoken`, `pathspec`) are installed. --- ## License This repository is provided under the MIT License. See the LICENSE file for details. --- ## Contributing Feel free to submit issues or pull requests. Contributions that improve the code, documentation, or add new features (such as better multi-turn support) are welcome. --- Happy coding and enjoy your enhanced Emacs AI experience!
+- `retrieve_relevant_chunks(db_dir, query, top_k)`: Queries the database for matching chunks. - **Usage Example:**
+
+```
+bash
+
+python3 query_codebase.py /path/to/project "How do I call get_secrets()?"
+```
+
+---
+
+## Troubleshooting
+
+- **Ensure Consistency:** Use the same project root when indexing and querying so that the `<project_root>/chroma_db` folder is correctly referenced.
+
+- **Environment Variables:** Make sure the `OPENAI_API_KEY` is set in your shell environment or via Emacs’s `setenv`.
+
+- **Dependencies:** Verify all Python packages (`chromadb`, `openai`, `tiktoken`, `pathspec`) are installed.
+
+---
+
+## License This repository is provided under the GNU General Public License v3.0 License. See the LICENSE file for details.
+
+---
+
+## Contributing Feel free to submit issues or pull requests. Contributions that improve the code, documentation, or add new features (such as better multi-turn support) are welcome.
+
+---
+
+Happy coding and enjoy your enhanced Emacs AI experience!
 
