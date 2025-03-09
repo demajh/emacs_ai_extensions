@@ -185,11 +185,15 @@ python3 query_codebase.py /path/to/project "How do I call get_secrets()?"
 
 ---
 
-## License This repository is provided under the GNU General Public License v3.0 License. See the LICENSE file for details.
+## License
+
+This repository is provided under the GNU General Public License v3.0 License. See the LICENSE file for details.
 
 ---
 
-## Contributing Feel free to submit issues or pull requests. Contributions that improve the code, documentation, or add new features (such as better multi-turn support) are welcome.
+## Contributing
+
+Feel free to submit issues or pull requests. Contributions that improve the code, documentation, or add new features (such as better multi-turn support) are welcome.
 
 ---
 
