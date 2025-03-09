@@ -89,5 +89,81 @@ elisp
 M-x ai-completion-mode
 ```
 
-You should see “AI-Complete” in your mode line. - **Trigger Completion:** Press `C-c C-a` to send the surrounding code to OpenAI and insert the completion at point. ### RAG-Based QA Extension 1. **Start RAG Chat Mode:** ```elisp M-x rag-chat-mode ``` This opens the *RAG Chat* buffer with usage instructions. 2. **Index Your Codebase:** ```elisp M-x rag-chat-index-codebase ``` You will be prompted for: - **Project root:** The top directory of your project (where a folder `chroma_db` will be created). - **Subdir to index (optional):** If you want to index only a subdirectory. The Python script will run asynchronously. Check the *RAG Index Output* buffer for progress. 3. **Ask a Question:** ```elisp M-x rag-chat-ask-question ``` You will be prompted for: - **Project root:** Enter the same directory used during indexing. - **Question:** For example, “How do I call get_secrets()?” The extension will query the local Chroma DB, send a combined prompt to OpenAI, and display the final Q&A in the *RAG Chat* buffer in a new window. 4. **Closing the *RAG Chat* Buffer:** While in the *RAG Chat* buffer, press `q` (bound to `quit-window`), or use `C-x k` to kill the buffer. --- ## Python Scripts Overview ### index_codebase.py - **Purpose:** Recursively scans all files in a given directory, chunks each file into manageable pieces (approx. 1000 tokens by word count), obtains embeddings using OpenAI’s text-embedding-ada-002, and stores them in a local Chroma database located at `<project_root>/chroma_db`. - **Key Functions:** - `chunk_text(text, max_chunk_size)`: Splits file content into chunks. - `embed_text(text)`: Gets vector embeddings from OpenAI. - `index_directory(code_dir, db_dir)`: Processes each file and stores the embeddings. - **Usage Example:** ```bash python3 index_codebase.py /path/to/project [subdir] ``` ### query_codebase.py - **Purpose:** Given a project root and a query, it loads the Chroma DB from `<project_root>/chroma_db` and retrieves the top relevant code chunks. - **Key Functions:** - `retrieve_relevant_chunks(db_dir, query, top_k)`: Queries the database for matching chunks. - **Usage Example:** ```bash python3 query_codebase.py /path/to/project "How do I call get_secrets()?" ``` --- ## Troubleshooting - **Ensure Consistency:** Use the same project root when indexing and querying so that the `<project_root>/chroma_db` folder is correctly referenced. - **Environment Variables:** Make sure the `OPENAI_API_KEY` is set in your shell environment or via Emacs’s `setenv`. - **Dependencies:** Verify all Python packages (`chromadb`, `openai`, `tiktoken`, `pathspec`) are installed. --- ## License This repository is provided under the MIT License. See the LICENSE file for details. --- ## Contributing Feel free to submit issues or pull requests. Contributions that improve the code, documentation, or add new features (such as better multi-turn support) are welcome. --- Happy coding and enjoy your enhanced Emacs AI experience!
+You should see “AI-Complete” in your mode line.
+
+- **Trigger Completion:** Press `C-c C-a` to send the surrounding code to OpenAI and insert the completion at point.
+
+### RAG-Based QA Extension
+
+1. **Start RAG Chat Mode:**
+
+```
+elisp
+
+M-x rag-chat-mode
+```
+
+This opens the *RAG Chat* buffer with usage instructions.
+
+2. **Index Your Codebase:**
+
+```
+elisp
+
+M-x rag-chat-index-codebase
+```
+
+You will be prompted for:
+
+- **Project root:** The top directory of your project (where a folder `chroma_db` will be created).
+
+- **Subdir to index (optional):** If you want to index only a subdirectory. The Python script will run asynchronously. Check the *RAG Index Output* buffer for progress.
+
+3. **Ask a Question:**
+
+```
+elisp
+
+M-x rag-chat-ask-question
+```
+
+You will be prompted for:
+
+- **Project root:** Enter the same directory used during indexing.
+
+- **Question:** For example, “How do I call get_secrets()?” The extension will query the local Chroma DB, send a combined prompt to OpenAI, and display the final Q&A in the *RAG Chat* buffer in a new window.
+
+4. **Closing the *RAG Chat* Buffer:** While in the *RAG Chat* buffer, press `q` (bound to `quit-window`), or use `C-x k` to kill the buffer.
+
+---
+
+## Python Scripts Overview
+
+### index_codebase.py
+
+- **Purpose:** Recursively scans all files in a given directory, chunks each file into manageable pieces (approx. 1000 tokens by word count), obtains embeddings using OpenAI’s text-embedding-ada-002, and stores them in a local Chroma database located at `<project_root>/chroma_db`.
+
+- **Key Functions:**
+
+- `chunk_text(text, max_chunk_size)`: Splits file content into chunks.
+
+- `embed_text(text)`: Gets vector embeddings from OpenAI.
+
+- `index_directory(code_dir, db_dir)`: Processes each file and stores the embeddings.
+
+-**Usage Example:**
+
+```
+bash
+
+python3 index_codebase.py /path/to/project [subdir]
+```
+
+### query_codebase.py
+
+- **Purpose:** Given a project root and a query, it loads the Chroma DB from `<project_root>/chroma_db` and retrieves the top relevant code chunks.
+
+- **Key Functions:**
+
+- `retrieve_relevant_chunks(db_dir, query, top_k)`: Queries the database for matching chunks. - **Usage Example:** ```bash python3 query_codebase.py /path/to/project "How do I call get_secrets()?" ``` --- ## Troubleshooting - **Ensure Consistency:** Use the same project root when indexing and querying so that the `<project_root>/chroma_db` folder is correctly referenced. - **Environment Variables:** Make sure the `OPENAI_API_KEY` is set in your shell environment or via Emacs’s `setenv`. - **Dependencies:** Verify all Python packages (`chromadb`, `openai`, `tiktoken`, `pathspec`) are installed. --- ## License This repository is provided under the MIT License. See the LICENSE file for details. --- ## Contributing Feel free to submit issues or pull requests. Contributions that improve the code, documentation, or add new features (such as better multi-turn support) are welcome. --- Happy coding and enjoy your enhanced Emacs AI experience!
 
