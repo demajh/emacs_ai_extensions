@@ -17,7 +17,8 @@ Both extensions are designed to work locally with minimal setup. Follow the inst
 ├── index_codebase.py # Python script to index your codebase into a local Chroma DB.
 ├── query_codebase.py # Python script to query the local Chroma DB.
 ├── requirements.txt # (Optional) List of required Python packages.
-└── README.md # This file. ```
+└── README.md # This file.
+```
 
 ---
 
